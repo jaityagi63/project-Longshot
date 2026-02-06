@@ -1,37 +1,64 @@
 # Detective 🕵️
 
-**Domain:** Intelligence
+**Domain:** Intelligence  
 **Description:** Searches the web for facts and news related to a specific keyword or event.
+
+## Overview
+
+The Detective module is the intelligence-gathering component of Project Longshot. It performs web searches using multiple backends (DuckDuckGo, Google) with automatic fallback and retry logic.
+
+## Features
+
+- **Multi-backend search**: Uses DuckDuckGo as primary, Google as fallback
+- **Automatic retry**: Handles rate limiting and temporary failures
+- **Simulation mode**: Provides mock data when network is unavailable
+- **Structured results**: Returns consistent data format for downstream processing
 
 ## Usage
 
-The Detective module is a Python script that uses the `duckduckgo-search` library to find information.
+### As a Module
 
-### Prerequisites
+```python
+from src.detective import Detective
 
-```bash
-pip install -r requirements.txt
+detective = Detective()
+clues = detective.investigate("semiconductor shortage 2024", max_results=5)
+
+for clue in clues:
+    print(f"Title: {clue['title']}")
+    print(f"Link: {clue['link']}")
+    print(f"Snippet: {clue['snippet']}")
 ```
 
-### Running the Detective
-
-You can run the detective from the command line:
+### From Command Line
 
 ```bash
-python detective.py "your query here"
+python -m src.detective.detective "your search query"
 ```
 
-Example:
+## Prerequisites
 
 ```bash
-python detective.py "latest advancements in quantum computing"
+pip install duckduckgo-search googlesearch-python
 ```
 
-### Code Structure
+## Output Format
 
-- `detective.py`: Main class `Detective` with `investigate(query)` method.
+Each result contains:
+- `title`: The title of the search result
+- `link`: URL to the source
+- `snippet`: Brief description/excerpt
+- `timestamp`: When the search was performed
+
+## Configuration
+
+The Detective uses the following configuration options from `config.py`:
+- `DETECTIVE_MAX_RESULTS`: Maximum results to return (default: 5)
+- `DETECTIVE_RETRY_ATTEMPTS`: Number of retry attempts (default: 3)
 
 ## Notes
 
-- The module uses `duckduckgo_search` (or `ddgs`) to perform anonymous searches.
-- If you encounter "No results" or timeouts, check your internet connection or try again later as you might be rate-limited.
+- Uses anonymous search to avoid tracking
+- Respects rate limits with exponential backoff
+- Network-blocked environments will receive simulated results
+- Results should be verified using the Truth Serum module

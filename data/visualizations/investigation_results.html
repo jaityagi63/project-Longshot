@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investigation: cybersecurity data breach</title>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three-globe@2.24.0/dist/three-globe.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+        .header {
+            padding: 20px;
+            text-align: center;
+            background: rgba(0,0,0,0.3);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .header h1 {
+            font-size: 2rem;
+            background: linear-gradient(90deg, #00d4ff, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        #globe-container {
+            width: 100%;
+            height: 70vh;
+            position: relative;
+        }
+        .legend {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.7);
+            padding: 15px;
+            border-radius: 10px;
+            z-index: 100;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 30px;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            padding: 20px 40px;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(90deg, #00d4ff, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .stat-label {
+            color: #888;
+            margin-top: 5px;
+        }
+        .marker-list {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .marker-item {
+            display: flex;
+            align-items: center;
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border-left: 4px solid;
+        }
+        .marker-icon {
+            font-size: 2rem;
+            margin-right: 15px;
+        }
+        .marker-info h3 { margin-bottom: 5px; }
+        .marker-info p { color: #888; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎯 Investigation: cybersecurity data breach</h1>
+        <p>Real-time global impact visualization</p>
+    </div>
+    
+    <div id="globe-container">
+        <div class="legend">
+            <h4>Impact Severity</h4>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #4CAF50;"></div>
+                <span>Low</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #FFC107;"></div>
+                <span>Medium</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #FF9800;"></div>
+                <span>High</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #F44336;"></div>
+                <span>Critical</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-value">3</div>
+            <div class="stat-label">Impact Points</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">0</div>
+            <div class="stat-label">Connections</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">3</div>
+            <div class="stat-label">Critical Alerts</div>
+        </div>
+    </div>
+    
+    <div class="marker-list">
+        <h2>📍 Impact Markers</h2>
+        
+        <div class="marker-item" style="border-color: #F44336;">
+            <div class="marker-icon">🔴</div>
+            <div class="marker-info">
+                <h3>SmartWidget Pro</h3>
+                <p>Impact score: 70% | Austin, TX, USA</p>
+            </div>
+        </div>
+        <div class="marker-item" style="border-color: #F44336;">
+            <div class="marker-icon">🔴</div>
+            <div class="marker-info">
+                <h3>Government Contract #2024-DEF</h3>
+                <p>Impact score: 80% | Austin, TX, USA</p>
+            </div>
+        </div>
+        <div class="marker-item" style="border-color: #F44336;">
+            <div class="marker-icon">🔴</div>
+            <div class="marker-info">
+                <h3>Cloud Infrastructure (AWS)</h3>
+                <p>Impact score: 90% | Austin, TX, USA</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Globe visualization placeholder
+        // In production, this would use Three.js Globe or similar
+        const container = document.getElementById('globe-container');
+        
+        // Add a placeholder message
+        const placeholder = document.createElement('div');
+        placeholder.style.cssText = 'position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;';
+        placeholder.innerHTML = '<h2>🌍 Interactive Globe</h2><p>3D visualization requires WebGL support</p>';
+        container.appendChild(placeholder);
+        
+        // Marker data for interactive features
+        const markers = [{"lat": 30.2672, "lng": -97.7431, "label": "SmartWidget Pro", "description": "Impact score: 70%", "color": "#F44336", "radius": 20.0, "severity": "critical"}, {"lat": 30.2672, "lng": -97.7431, "label": "Government Contract #2024-DEF", "description": "Impact score: 80%", "color": "#F44336", "radius": 20.0, "severity": "critical"}, {"lat": 30.2672, "lng": -97.7431, "label": "Cloud Infrastructure (AWS)", "description": "Impact score: 90%", "color": "#F44336", "radius": 20.0, "severity": "critical"}];
+        const connections = [];
+        
+        console.log('Digital Twin loaded with', markers.length, 'markers and', connections.length, 'connections');
+    </script>
+</body>
+</html>
